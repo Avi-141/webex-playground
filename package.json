@@ -1,0 +1,19 @@
+{
+  "name": "webex-playground",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "list-spaces": "node list_spaces.mjs",
+    "fetch": "node fetch.mjs",
+    "up": "podman compose up -d weaviate",
+    "down": "podman compose down",
+    "build-threads": "podman compose run --rm pipeline python build_threads.py",
+    "index": "podman compose run --rm pipeline python index_rag.py",
+    "query": "podman compose run --rm pipeline python query.py"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.0.0",
+    "dotenv": "^16.0.0",
+    "request": "^2.88.2"
+  }
+}

@@ -1,0 +1,40 @@
+services:
+  weaviate:
+    image: cr.weaviate.io/semitechnologies/weaviate:1.28.4
+    restart: on-failure
+    ports:
+      - "8080:8080"
+      - "50051:50051"
+    volumes:
+      - weaviate_data:/var/lib/weaviate
+    environment:
+      QUERY_DEFAULTS_LIMIT: 25
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: "true"
+      PERSISTENCE_DATA_PATH: "/var/lib/weaviate"
+      DEFAULT_VECTORIZER_MODULE: "text2vec-ollama"
+      ENABLE_MODULES: "text2vec-ollama"
+      CLUSTER_HOSTNAME: "node1"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  pipeline:
+    build: .
+    volumes:
+      - ./webex.db:/app/webex.db:ro
+      - ./threads.json:/app/threads.json
+      - ./build_threads.py:/app/build_threads.py:ro
+      - ./index_rag.py:/app/index_rag.py:ro
+      - ./query.py:/app/query.py:ro
+    environment:
+      DB_PATH: /app/webex.db
+      THREADS_PATH: /app/threads.json
+      WEAVIATE_HOST: weaviate
+      OLLAMA_URL_WEAVIATE: http://host.docker.internal:11434
+      EMBED_MODEL: nomic-embed-text
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - weaviate
+
+volumes:
+  weaviate_data:
