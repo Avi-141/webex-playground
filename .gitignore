@@ -1,0 +1,10 @@
+node_modules/
+.env
+webex.db
+webex.db-wal
+webex.db-shm
+threads.json
+__pycache__/
+*.pyc
+.DS_Store
+spaces.json
