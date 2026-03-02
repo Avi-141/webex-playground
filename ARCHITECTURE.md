@@ -3,7 +3,7 @@
 ## Current Pipeline (v1)
 
 ```
-Webex API ──► SQLite (28,741 messages) ──► Thread Documents ──► Weaviate (vector search)
+Webex API ──► SQLite  ──► Thread Documents ──► Weaviate (vector search)
   fetch.mjs    webex.db                    build_threads.py      index_rag.py / query.py
 ```
 
@@ -24,21 +24,6 @@ Webex API ──► SQLite (28,741 messages) ──► Thread Documents ──�
 - Vectorizer: `text2vec-ollama` module in Weaviate
 - Content over 12k chars is truncated for embedding only; full content is stored separately and returned in query results.
 - Schema splits `content` (full, stored, not vectorized) from `content_for_embedding` (with preamble, vectorized).
-
-### Spaces Indexed
-
-| Space | Messages |
-|---|---|
-| New AI/ML Research and News | 1,266 |
-| Ask-AI Canvas | 1,713 |
-| Ask-AI Defense | 4,992 |
-| GenAI + Agentic AI | 1,101 |
-| Cisco Investments Startup Showcase | 351 |
-| Generative AI Explorers | 17,070 |
-| Artificial Intelligence and Machine Learning | 2,248 |
-| **Total** | **28,741** |
-
----
 
 ## Known Limitations
 
@@ -132,7 +117,7 @@ The retrieval pipeline now has three phases:
 
 ### Phase 1: Space Resolution
 Parse the query for space name references. Fuzzy-match against known space titles from SQLite.
-- "Tell me about AI Defense" → resolves to Ask-AI Defense space → applies as filter
+- "Tell me about AI Defense" → resolves to AI Defense space → applies as filter
 - Uses `difflib.SequenceMatcher` + substring matching
 - Also supports explicit `--space` flag with name or ID
 
