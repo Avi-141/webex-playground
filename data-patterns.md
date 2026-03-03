@@ -5,7 +5,7 @@ Here's the full analysis:
 ## Data Patterns & Retrieval Opportunities
 
 ### 1. Content Coverage
-| Field | Count | % of 28,741 |
+| Field | Count | % of N |
 |---|---|---|
 | Has text |
 | Has HTML |
