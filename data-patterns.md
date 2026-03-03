@@ -7,12 +7,12 @@ Here's the full analysis:
 ### 1. Content Coverage
 | Field | Count | % of 28,741 |
 |---|---|---|
-| Has text | 28,213 | 98.2% |
-| Has HTML | 8,354 | 29.1% |
-| Has markdown | 1,449 | 5.0% |
-| Empty (file-only) | 528 | 1.8% |
-| Has links | 6,069 | 21.1% |
-| Has @mentions | 3,360 | 11.7% |
+| Has text |
+| Has HTML |
+| Has markdown |
+| Empty (file-only) |
+| Has links |
+| Has @mentions |
 
 **Actionable**: 528 messages have no text -- they're file-only messages (images, attachments). Currently these index as empty docs. We should either skip them or tag them as `file_share`.
 
